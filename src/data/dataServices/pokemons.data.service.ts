@@ -1,3 +1,4 @@
+import { trackPromise } from "react-promise-tracker";
 import { PokemonsService } from "../../domain/services";
 import { Endpoints } from "../endpoints";
 import { httpService } from "../http";
@@ -16,11 +17,18 @@ export function pokemonsDataService(): PokemonsService {
   return {
     async getPokemons({ limit = 20, offset = 0, onSuccess, onError }) {
       try {
-        const response: PokemonsResponse = await get(Endpoints.pokemon, {
-          limit,
-          offset,
-        });
-        if (onSuccess) onSuccess(response.data.results);
+        const response: PokemonsResponse = await trackPromise(
+          get(Endpoints.pokemon, {
+            limit,
+            offset,
+          }),
+          "getPokemonsPromise"
+        );
+        if (onSuccess)
+          onSuccess({
+            pokemonsData: response.data.results,
+            filter: { limit, offset },
+          });
       } catch (e) {
         if (onError) onError(e);
       }

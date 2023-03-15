@@ -26,6 +26,7 @@
     "react-native-screens": "~3.20.0",
     "react-native-vector-icons": "^9.2.0",
     "react-navigation": "^4.4.4",
+    "react-promise-tracker": "^2.1.1",
     "styled-components": "^5.3.8",
     "styled-components-react-native": "^1.0.0"
   },

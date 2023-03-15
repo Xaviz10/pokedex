@@ -15,15 +15,19 @@ export type PokedexScreenParamList = {
 };
 
 export function PokedexScreen({ navigation }: PokedexScreenProps) {
-  const { pokemons } = usePokedexViewModel();
+  const { pokemons, handleGetNewPokemons } = usePokedexViewModel();
   return (
     <SafeAreaView>
-      <Text>Home</Text>
-      <PokemonsList pokemons={pokemons} />
-      <Button
+      {pokemons.length > 0 && (
+        <PokemonsList
+          pokemons={pokemons}
+          handleGetNewPokemons={handleGetNewPokemons}
+        />
+      )}
+      {/* <Button
         title="Go Pokemon"
         onPress={() => navigation.navigate("Pokemon")}
-      />
+      /> */}
     </SafeAreaView>
   );
 }
