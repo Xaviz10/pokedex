@@ -33,7 +33,7 @@ export function NavigationTab() {
         component={PokedexNavigation}
         options={{
           headerShown: false,
-          headerTitle: "Pokedex",
+          headerTitle: "",
           tabBarLabel: "",
           tabBarIcon: () => <PokedexIcon />,
         }}

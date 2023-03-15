@@ -7,4 +7,7 @@ export interface PokemonSpritesEntity {
   front_female: null;
   front_shiny: string;
   front_shiny_female: null;
+  other: {
+    "official-artwork": { front_default: string };
+  };
 }

@@ -10,7 +10,11 @@ const Stack = createNativeStackNavigator<RootTabParamList>();
 export function PokedexNavigation() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Pokedex" component={PokedexScreen} />
+      <Stack.Screen
+        name="Pokedex"
+        component={PokedexScreen}
+        options={{ title: "", headerShown: false, headerTitle: "" }}
+      />
       <Stack.Screen name="Pokemon" component={PokemonScreen} />
     </Stack.Navigator>
   );
