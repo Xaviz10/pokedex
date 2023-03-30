@@ -6,14 +6,21 @@ export interface pokemonsFiltered extends handleResponse {
   offset?: number;
 }
 
-export interface pokemonData extends handleResponse {
+export interface pokemonDataByUrl extends handleResponse {
   url: string;
 }
-
+export interface pokemonData extends handleResponse {
+  id: number;
+}
 export interface PokemonsService {
   getPokemons({ limit, offset, onSuccess, onError }: pokemonsFiltered): void;
-  getPokemonData({
+  getPokemonDataByUrl({
     url,
+    onSuccess,
+    onError,
+  }: pokemonDataByUrl): Promise<PokemonModel | undefined>;
+  getPokemonData({
+    id,
     onSuccess,
     onError,
   }: pokemonData): Promise<PokemonModel | undefined>;

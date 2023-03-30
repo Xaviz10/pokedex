@@ -1,6 +1,6 @@
-import { PokemonUrlEntity } from "./pokemonUrl.entity";
+import { PokemonTypeColorsEntity } from "./pokemonTypeColors.entity";
 
 export interface PokemonTypeEntity {
   slot: number;
-  type: PokemonUrlEntity;
+  type: PokemonTypeColorsEntity;
 }

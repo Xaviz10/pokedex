@@ -10,7 +10,7 @@ export type RootTabParamList = {
   PokedexNavigator: undefined;
   Favorite: undefined;
   Account: undefined;
-  Pokemon: undefined;
+  Pokemon: { id: number };
 };
 const Tab = createBottomTabNavigator<RootTabParamList>();
 

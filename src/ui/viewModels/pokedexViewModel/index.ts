@@ -3,6 +3,9 @@ import { pokemonsDataService } from "../../../data/dataServices";
 import { useEffect, useState } from "react";
 import { PokemonEntity, PokemonUrlEntity } from "../../../domain/entities";
 import { usePromises } from "../../hooks";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList, RootTabParamList } from "../../navigation";
 
 interface PokemonDataSuccessProps {
   pokemonsData: Array<PokemonUrlEntity>;
@@ -10,7 +13,9 @@ interface PokemonDataSuccessProps {
 }
 
 export function usePokedexViewModel() {
-  const { getPokemons, getPokemonData } = useCasesPokemons(
+  const { navigate } =
+    useNavigation<NativeStackNavigationProp<RootTabParamList>>();
+  const { getPokemons, getPokemonDataByUrl } = useCasesPokemons(
     pokemonsDataService()
   );
   const { promiseInProgressArea: promiseGetPokemonsPromise } =
@@ -24,7 +29,9 @@ export function usePokedexViewModel() {
     let pokemonsArray: Array<PokemonEntity> = [];
     try {
       for await (const currentPokemon of pokemonsData) {
-        const pokemonData = await getPokemonData({ url: currentPokemon.url });
+        const pokemonData = await getPokemonDataByUrl({
+          url: currentPokemon.url,
+        });
         pokemonData &&
           pokemonsArray.push({
             id: pokemonData.id,
@@ -52,9 +59,13 @@ export function usePokedexViewModel() {
     }
   }
 
+  function navigateToPokemon(id: number) {
+    navigate("Pokemon", { id });
+  }
+
   useEffect(() => {
     getPokemons({ ...filter, onSuccess: handlePokemonsSuccess });
   }, []);
 
-  return { pokemons, handleGetNewPokemons };
+  return { pokemons, handleGetNewPokemons, navigateToPokemon };
 }
