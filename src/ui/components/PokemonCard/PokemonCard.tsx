@@ -9,12 +9,12 @@ import {
 
 interface PokemonCardProps {
   pokemon: PokemonEntity;
-  // onPress: (event: GestureResponderEvent) => void;
+  navigateToPokemon: (id: number) => void;
 }
 
-export function PokemonCard({ pokemon }: PokemonCardProps) {
+export function PokemonCard({ pokemon, navigateToPokemon }: PokemonCardProps) {
   return (
-    <StyledCard onPress={() => console.log(`Vamos a ${pokemon.name}`)}>
+    <StyledCard onPress={() => navigateToPokemon(pokemon.id)}>
       <StyledInnerContainerCard>
         <Image
           source={{ uri: pokemon.image }}

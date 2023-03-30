@@ -2,7 +2,7 @@ import { trackPromise } from "react-promise-tracker";
 import { PokemonsService } from "../../domain/services";
 import { Endpoints } from "../endpoints";
 import { httpService } from "../http";
-import { PokemonModel, PokemonsModel } from "../models";
+import { PokemonCompleteModel, PokemonModel, PokemonsModel } from "../models";
 
 interface PokemonsResponse {
   data: PokemonsModel;
@@ -10,6 +10,10 @@ interface PokemonsResponse {
 
 interface PokemonDataResponse {
   data: PokemonModel;
+}
+
+interface PokemonCompleteDataResponse {
+  data: PokemonCompleteModel;
 }
 
 export function pokemonsDataService(): PokemonsService {
@@ -33,11 +37,28 @@ export function pokemonsDataService(): PokemonsService {
         if (onError) onError(e);
       }
     },
-    async getPokemonData({ url, onSuccess, onError }) {
+    async getPokemonDataByUrl({ url, onSuccess, onError }) {
       try {
         const response: PokemonDataResponse = await get(url);
         if (onSuccess) onSuccess(response.data);
         return response.data;
+      } catch (e) {
+        if (onError) onError(e);
+      }
+    },
+    async getPokemonData({ id, onSuccess, onError }) {
+      try {
+        const responseBase: PokemonCompleteDataResponse = await trackPromise(
+          get(`${Endpoints.pokemon}/${id}`),
+          "getPokemonData"
+        );
+        const responseSpecies: PokemonCompleteDataResponse = await trackPromise(
+          get(`${Endpoints.pokemonSpecies}/${id}`),
+          "getPokemonData"
+        );
+        if (onSuccess)
+          onSuccess({ ...responseBase.data, ...responseSpecies.data });
+        return { ...responseBase.data, ...responseSpecies.data };
       } catch (e) {
         if (onError) onError(e);
       }

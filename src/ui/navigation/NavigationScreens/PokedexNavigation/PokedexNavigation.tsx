@@ -15,7 +15,11 @@ export function PokedexNavigation() {
         component={PokedexScreen}
         options={{ title: "", headerShown: false, headerTitle: "" }}
       />
-      <Stack.Screen name="Pokemon" component={PokemonScreen} />
+      <Stack.Screen
+        name="Pokemon"
+        component={PokemonScreen}
+        options={{ title: "", headerShown: false, headerTitle: "" }}
+      />
     </Stack.Navigator>
   );
 }
