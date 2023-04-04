@@ -21,8 +21,8 @@ export function NavigationTab() {
         name="Favorite"
         component={FavoriteScreen}
         options={{
-          headerTitle: "Favoritos",
-          tabBarLabel: "Favoritos",
+          headerTitle: "Favorites",
+          tabBarLabel: "Favorites",
           tabBarIcon: ({ color, size }) => (
             <Icon name="heart" color={color} size={size} />
           ),
@@ -42,8 +42,8 @@ export function NavigationTab() {
         name="Account"
         component={AccountScreen}
         options={{
-          headerTitle: "Mi cuenta",
-          tabBarLabel: "Mi cuenta",
+          headerTitle: "Account",
+          tabBarLabel: "Account",
           tabBarIcon: ({ color, size }) => (
             <Icon name="user" color={color} size={size} />
           ),

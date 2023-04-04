@@ -7,3 +7,4 @@ export * from "./pokemonStat.entity";
 export * from "./pokemonType.entity";
 export * from "./pokemonTypeColors.entity";
 export * from "./pokemonUrl.entity";
+export * from "./user.entity";

@@ -19,9 +19,10 @@ export const StyledButton = styled(Pressable).attrs({
 export const StyledButtonTitle = styled.Text.attrs({
   className: "StyledButtonTitle",
 })`
+  margin: 0 auto;
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 18px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
   color: #ffffff;
 `;
