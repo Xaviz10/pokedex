@@ -12,6 +12,7 @@ import {
   StyledCharacteristicText,
   StyledCharacteristicValue,
   StyledContainerLogo,
+  StyledFavoriteContainer,
   StyledFlavorText,
   StyledId,
   StyledImagePokemon,
@@ -29,26 +30,34 @@ import {
   StyledVerticalLine,
   StyledVerticalLineStats,
 } from "./PokemonScreen.styles";
+import HeartFullIcon from "../../assets/images/heartFullIcon.svg";
+import HeartEmptyIcon from "../../assets/images/heartEmptyIcon.svg";
 
 type PokemonScreenProps = NativeStackScreenProps<RootTabParamList, "Pokemon">;
 
 export function PokemonScreen({ route, navigation }: PokemonScreenProps) {
-  const { pokemon } = usePokemonViewModel(route.params.id);
+  const { pokemon, auth } = usePokemonViewModel(route.params.id);
   return (
     <StyledPokemonScreen backgroundColorType={pokemon?.types[0].type}>
       {pokemon ? (
         <>
           <StyledContainerLogo>
-            <StyledButton onPress={() => navigation.goBack()}>
+            {/* <StyledButton onPress={() => navigation.goBack()}>
               <ArrowBack />
               <StyledName>{pokemon.name}</StyledName>
-            </StyledButton>
+            </StyledButton> */}
             <StyledLogo
               source={require("../../assets/images/pokeballWaterMark.png")}
             />
-            <StyledId>#{`${pokemon.id}`.padStart(3, "0")}</StyledId>
+            {/* <StyledId>#{`${pokemon.id}`.padStart(3, "0")}</StyledId> */}
           </StyledContainerLogo>
           <StyledInnerContainer>
+            {!!auth && (
+              <StyledFavoriteContainer>
+                <HeartFullIcon width={"30px"} height={"30px"} />
+                <HeartEmptyIcon width={"30px"} height={"30px"} />
+              </StyledFavoriteContainer>
+            )}
             <StyledImagePokemon source={{ uri: pokemon.image }} />
             <StyledBadgesTypeContainer>
               {pokemon.types.map((currentType, index) => (

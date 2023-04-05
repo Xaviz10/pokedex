@@ -57,7 +57,6 @@ export const StyledContainerLogo = styled.View.attrs({
   className: "StyledContainerLogo",
 })`
   position: relative;
-  margin-top: 32px;
   height: 30%;
   display: flex;
   flex-direction: row;
@@ -69,10 +68,6 @@ export const StyledContainerLogo = styled.View.attrs({
 export const StyledButton = styled.TouchableOpacity.attrs({
   className: "StyledButton",
 })`
-  position: absolute;
-  padding-left: 20px;
-  top: 0px;
-  left: 0;
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -89,17 +84,14 @@ export const StyledName = styled.Text.attrs({
 export const StyledLogo = styled.Image.attrs({
   className: "StyledLogo",
 })`
-  height: 230px;
-  width: 230px;
+  height: 240px;
+  width: 240px;
   opacity: 0.15;
 `;
 export const StyledId = styled.Text.attrs({
   className: "StyledId",
 })`
-  position: absolute;
-  top: 0;
-  left: 100%;
-  transform: translate(-40px, 12px);
+  transform: translateY(4px);
 
   font-weight: 700;
   font-size: 14px;
@@ -110,9 +102,9 @@ export const StyledId = styled.Text.attrs({
 export const StyledInnerContainer = styled.View.attrs({
   className: "StyledInnerContainer",
 })`
-position: relative;
-height: 60%;
-  margin: 4px 8px
+  position: relative;
+  height: 60%;
+  margin: 4px 8px;
   padding: 20px;
   padding-top: 64px;
   flex: 1;
@@ -121,14 +113,25 @@ height: 60%;
   gap: 20px;
   align-items: center;
   border-radius: 4px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 8px;
-  
+
   shadow-color: #000;
   shadow-offset: 0px 1px;
   shadow-opacity: 0.25;
   shadow-radius: 2px;
   elevation: 1;
+`;
+
+export const StyledFavoriteContainer = styled.View.attrs({
+  className: "StyledFavoriteContainer",
+})`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 16px;
+  left: 100%;
+  transform: translateX(-8px);
 `;
 
 export const StyledTitle = styled.Text.attrs({

@@ -50,7 +50,6 @@ export const StyledValue = styled.Text.attrs({
   font-weight: 500;
   font-size: 14px;
 
-  letter-spacing: 0.03em;
   color: #000000;
 `;
 

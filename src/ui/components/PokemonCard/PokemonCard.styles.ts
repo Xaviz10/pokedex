@@ -1,4 +1,3 @@
-import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import styled from "styled-components/native";
 
 export const StyledCard = styled.TouchableWithoutFeedback.attrs({

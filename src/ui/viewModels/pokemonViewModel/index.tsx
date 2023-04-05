@@ -3,12 +3,21 @@ import { useCasesPokemons } from "../../../domain/useCases";
 import { pokemonsDataService } from "../../../data/dataServices";
 import { PokemonCompleteDataEntity } from "../../../domain/entities";
 import { PokemonCompleteModel } from "../../../data/models";
-import { usePromises } from "../../hooks";
+import { useAuth, usePromises } from "../../hooks";
+import { useNavigation } from "@react-navigation/native";
+import {
+  StyledButton,
+  StyledId,
+  StyledName,
+} from "../../screens/PokemonScreen/PokemonScreen.styles";
+import { ArrowBack } from "../../assets";
 
 export function usePokemonViewModel(id: number) {
   const { getPokemonData } = useCasesPokemons(pokemonsDataService());
+  const { setOptions, goBack } = useNavigation();
   const { promiseInProgressArea: promiseGetPokemonsPromise } =
     usePromises("getPokemonsPromise");
+  const { auth } = useAuth();
 
   const [pokemon, setPokemon] = useState<PokemonCompleteDataEntity>();
 
@@ -27,11 +36,31 @@ export function usePokemonViewModel(id: number) {
     };
 
     setPokemon(pokemonCompleteDateFormatted);
+    setOptions({
+      headerLeft: () => (
+        <StyledButton onPress={() => goBack()}>
+          <ArrowBack />
+          <StyledName>{pokemonData.name}</StyledName>
+        </StyledButton>
+      ),
+      headerRight: () => (
+        <StyledId>#{`${pokemonData.id}`.padStart(3, "0")}</StyledId>
+      ),
+    });
   }
 
   useEffect(() => {
-    id && getPokemonData({ id, onSuccess: handlePokemonDataSuccess });
+    if (id) {
+      getPokemonData({ id, onSuccess: handlePokemonDataSuccess });
+    }
   }, [id]);
 
-  return { pokemon };
+  useEffect(() => {
+    setOptions({
+      headerLeft: () => <></>,
+      headerRight: () => <></>,
+    });
+  }, []);
+
+  return { pokemon, auth };
 }
